@@ -1,0 +1,84 @@
+<!-- <h3>DEPARTMENT</h3>
+<div >
+  <button class="btn btn-warning" style="float:right"  (click)="onClickAdd()" >ADD DEPARTMENT</button>
+</div> -->
+
+<div class='container'>
+   <h2>DEPARTMENTS</h2>
+  <button class="btn btn-lg btn-warning text-white float-right" (click)="open(content)">Add Department</button>
+</div>
+
+<br>
+<table class="table">
+  <thead>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Action</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of arrdept">
+      <td >{{item.name }}</td>
+      <td  >{{item.desc}}</td>
+
+     <td>
+        <button  type="button" class="btn btn-success" aria-label="Left Align" (click)="onClickEdit(item)">Edit</button>|
+        <button  type="button" class="btn btn-danger" aria-label="Left Align" (click)="onClickDelete(item)">Delete</button>
+
+     </td>
+    </tr>
+  </tbody>
+</table>
+<!-- popup -->
+<ng-template #content let-modal>
+  <form>
+     <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add New Department</h4>
+       <button type="button" class="close bg bg-danger" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">Close</span>
+       </button>
+    </div>
+  <!-- <div class="modal-body"> -->
+      <div class="from-group col-6">
+        <div class="form-group">
+          <label for="department">Department Name</label>
+              <div class="input-group">
+
+              <input name="deptname" type="text" required maxlength="10" pattern="[(a-zA-Z)]*" #name1="ngModel" class="form-control"  [(ngModel)]="name"  placeholder=" Enter Name"  >
+                  <label class="alert alert-danger" *ngIf="name1.hasError('pattern') && !name1.pristine" >Only Charecters</label>
+                   <label class="alert alert-danger" *ngIf="name1.hasError('required') && !name1.pristine" >Name is required</label>
+                   <label class="alert alert-danger" *ngIf="name1.hasError('minlength') && !name1.pristine" >Min 8 digits</label>
+
+               <div class="input-group-append">
+
+            <!-- <button class="btn btn-outline-secondary" (click)="dp.toggle()" type="button"></button> -->
+               </div>
+               </div>
+            </div>
+
+          </div>
+      <div class="form-group col-6">
+        <label for="description">Description</label>
+        <div class="input-group">
+          <input name="description" type="text"  required maxlength="50" pattern="[(a-zA-Z)]*" #name2="ngModel" class="form-control"  [(ngModel)]="desc"  placeholder=" Enter Description"  >
+          <label class="alert alert-danger" *ngIf="name2.hasError('pattern') && !name2.pristine" >Only Charecters</label>
+         <label class="alert alert-danger" *ngIf="name2.hasError('required') && !name2.pristine" >Name is required</label>
+           <label class="alert alert-danger" *ngIf="name2.hasError('minlength') && !name2.pristine" >Min 50 digits</label>
+           <div class="input-group-append">
+            <!-- <button class="btn btn-outline-secondary" (click)="dp.toggle()" type="button"></button> -->
+          </div>
+        </div>
+      </div>
+    </form>
+
+  <!-- </div> -->
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-info"  (click)="onAddDeptClick('Save click')">Save</button>
+    <button type="button" class="btn btn-outline-warning" (click)="modal.dismiss('Cross click')">cancel</button>
+  </div>
+</ng-template>
+
+
+
+<!-- <hr>
+
+<pre>{{closeResult}}</pre> -->
